@@ -191,15 +191,15 @@ public class TaskServiceHttp {
 		}
 	}
 
-	public static tasklistsb.model.Task updateAssignment(
+	public static tasklistsb.model.Task updateTask(
 			HttpPrincipal httpPrincipal, long taskId, String title,
 			String userName)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				TaskServiceUtil.class, "updateAssignment",
-				_updateAssignmentParameterTypes4);
+				TaskServiceUtil.class, "updateTask",
+				_updateTaskParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, taskId, title, userName);
@@ -246,7 +246,8 @@ public class TaskServiceHttp {
 	};
 	private static final Class<?>[] _getTaskByGroupIdParameterTypes3 =
 		new Class[] {long.class};
-	private static final Class<?>[] _updateAssignmentParameterTypes4 =
-		new Class[] {long.class, String.class, String.class};
+	private static final Class<?>[] _updateTaskParameterTypes4 = new Class[] {
+		long.class, String.class, String.class
+	};
 
 }

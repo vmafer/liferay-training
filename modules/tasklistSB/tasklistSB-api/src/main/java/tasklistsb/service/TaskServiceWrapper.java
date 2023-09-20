@@ -67,11 +67,11 @@ public class TaskServiceWrapper
 	}
 
 	@Override
-	public tasklistsb.model.Task updateAssignment(
+	public tasklistsb.model.Task updateTask(
 			long taskId, String title, String userName)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _taskService.updateAssignment(taskId, title, userName);
+		return _taskService.updateTask(taskId, title, userName);
 	}
 
 	@Override
