@@ -49,12 +49,11 @@ public class TaskServiceImpl extends TaskServiceBaseImpl {
                 taskLocalService.getTask(taskId);
         return task;
     }
-
     public List<Task> getTaskByGroupId(long groupId) {
         return taskPersistence.findByGroupId(groupId);
     }
 
-    public Task updateAssignment(long taskId, String title, String userName)
+    public Task updateTask(long taskId, String title, String userName)
             throws PortalException {
         return taskLocalService.updateTask(
                 taskId, title, userName);

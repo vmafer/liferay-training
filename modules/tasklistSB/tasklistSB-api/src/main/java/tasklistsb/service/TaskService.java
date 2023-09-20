@@ -64,7 +64,7 @@ public interface TaskService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Task> getTaskByGroupId(long groupId);
 
-	public Task updateAssignment(long taskId, String title, String userName)
+	public Task updateTask(long taskId, String title, String userName)
 		throws PortalException;
 
 }

@@ -60,11 +60,10 @@ public class TaskServiceUtil {
 		return getService().getTaskByGroupId(groupId);
 	}
 
-	public static Task updateAssignment(
-			long taskId, String title, String userName)
+	public static Task updateTask(long taskId, String title, String userName)
 		throws PortalException {
 
-		return getService().updateAssignment(taskId, title, userName);
+		return getService().updateTask(taskId, title, userName);
 	}
 
 	public static TaskService getService() {
