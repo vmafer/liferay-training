@@ -1,0 +1,11 @@
+dependencies {
+	api project(":modules:tasklistSB:tasklistSB-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+}
+
+buildService {
+	apiDir = "../tasklistSB-api/src/main/java"
+}
+
+group = "tasklistsb"

@@ -1,0 +1,10 @@
+Bundle-Name: tasklistSB-api
+Bundle-SymbolicName: tasklistsb.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tasklistsb.exception,\
+	tasklistsb.model,\
+	tasklistsb.service,\
+	tasklistsb.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../tasklistSB-service/service.xml
