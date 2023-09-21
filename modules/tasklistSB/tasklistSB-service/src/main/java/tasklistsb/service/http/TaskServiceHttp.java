@@ -191,6 +191,73 @@ public class TaskServiceHttp {
 		}
 	}
 
+	public static java.util.List<tasklistsb.model.Task> getTasksByKeywords(
+		HttpPrincipal httpPrincipal, long groupId, String keywords, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<tasklistsb.model.Task>
+			orderByComparator) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				TaskServiceUtil.class, "getTasksByKeywords",
+				_getTasksByKeywordsParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, keywords, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<tasklistsb.model.Task>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static long getTasksCountByKeywords(
+		HttpPrincipal httpPrincipal, long groupId, String keywords) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				TaskServiceUtil.class, "getTasksCountByKeywords",
+				_getTasksCountByKeywordsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, keywords);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return ((Long)returnObj).longValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static tasklistsb.model.Task updateTask(
 			HttpPrincipal httpPrincipal, long taskId, String title,
 			String userName)
@@ -199,7 +266,7 @@ public class TaskServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				TaskServiceUtil.class, "updateTask",
-				_updateTaskParameterTypes4);
+				_updateTaskParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, taskId, title, userName);
@@ -246,7 +313,14 @@ public class TaskServiceHttp {
 	};
 	private static final Class<?>[] _getTaskByGroupIdParameterTypes3 =
 		new Class[] {long.class};
-	private static final Class<?>[] _updateTaskParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getTasksByKeywordsParameterTypes4 =
+		new Class[] {
+			long.class, String.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getTasksCountByKeywordsParameterTypes5 =
+		new Class[] {long.class, String.class};
+	private static final Class<?>[] _updateTaskParameterTypes6 = new Class[] {
 		long.class, String.class, String.class
 	};
 

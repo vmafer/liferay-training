@@ -9,11 +9,13 @@ import com.liferay.portal.aop.AopService;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import org.osgi.service.component.annotations.Component;
 
 import tasklistsb.model.Task;
 import tasklistsb.service.base.TaskServiceBaseImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,6 +55,16 @@ public class TaskServiceImpl extends TaskServiceBaseImpl {
         return taskPersistence.findByGroupId(groupId);
     }
 
+    public List<Task> getTasksByKeywords(
+            long groupId, String keywords, int start, int end,
+            OrderByComparator<Task> orderByComparator) {
+        return taskLocalService.getTasksByKeywords(
+                groupId, keywords, start, end, orderByComparator);
+    }
+    public long getTasksCountByKeywords(long groupId, String keywords) {
+        return taskLocalService.getTasksCountByKeywords(
+                groupId, keywords);
+    }
     public Task updateTask(long taskId, String title, String userName)
             throws PortalException {
         return taskLocalService.updateTask(

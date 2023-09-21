@@ -7,11 +7,15 @@ package tasklistsb.service.impl;
 
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.dao.orm.Disjunction;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 import org.osgi.service.component.annotations.Component;
 
 import tasklistsb.model.Task;
@@ -36,9 +40,9 @@ public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
         long userId = serviceContext.getUserId();
         User user = userLocalService.getUser(userId);
 
-        long assignmentId = counterLocalService.increment(Task.class.getName());
+        long taskId = counterLocalService.increment(Task.class.getName());
 
-        Task task = createTask(assignmentId);
+        Task task = createTask(taskId);
         task.setCompanyId(group.getCompanyId());
 
         task.setCreateDate(serviceContext.getCreateDate(new Date()));
@@ -69,6 +73,40 @@ public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
         return taskPersistence.findByGroupId(groupId);
     }
 
+    public List<Task> getTasksByGroupId(long groupId, int start, int end) {
+        return taskPersistence.findByGroupId(groupId, start, end);
+    }
+    public List<Task> getTasksByGroupId(long groupId, int start, int end,
+                                                    OrderByComparator<Task> orderByComparator) {
+        return taskPersistence.findByGroupId(groupId, start, end, orderByComparator);
+    }
+    public List<Task> getTasksByKeywords(
+            long groupId, String keywords, int start, int end,
+            OrderByComparator<Task> orderByComparator) {
+        return taskLocalService.dynamicQuery(
+                getKeywordSearchDynamicQuery(groupId, keywords), start, end,
+                orderByComparator);
+    }
+    public long getTasksCountByKeywords(long groupId, String keywords) {
+        return taskLocalService.dynamicQueryCount(
+                getKeywordSearchDynamicQuery(groupId, keywords));
+    }
+    private DynamicQuery getKeywordSearchDynamicQuery(
+            long groupId, String keywords) {
+        DynamicQuery dynamicQuery = dynamicQuery().add(
+                RestrictionsFactoryUtil.eq("groupId", groupId));
+        if (Validator.isNotNull(keywords)) {
+            Disjunction disjunctionQuery =
+                    RestrictionsFactoryUtil.disjunction();
+            disjunctionQuery.add(
+                    RestrictionsFactoryUtil.like("title", "%" + keywords + "%"));
+            disjunctionQuery.add(
+                    RestrictionsFactoryUtil.like(
+                            "description", "%" + keywords + "%"));
+            dynamicQuery.add(disjunctionQuery);
+        }
+        return dynamicQuery;
+    }
     @Override
     public Task addTask(Task task) {
         throw new UnsupportedOperationException("Not supported.");
@@ -78,5 +116,4 @@ public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
     public Task updateTask(Task task) {
         throw new UnsupportedOperationException("Not supported.");
     }
-
 }
