@@ -1,0 +1,4 @@
+Bundle-Name: tasklistSB-web
+Bundle-SymbolicName: tasklistsb.web
+Bundle-Version: 1.0.0
+Export-Package: tasklistsb.web.constants
