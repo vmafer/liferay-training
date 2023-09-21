@@ -14,6 +14,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 
@@ -63,6 +64,14 @@ public interface TaskService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Task> getTaskByGroupId(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Task> getTasksByKeywords(
+		long groupId, String keywords, int start, int end,
+		OrderByComparator<Task> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getTasksCountByKeywords(long groupId, String keywords);
 
 	public Task updateTask(long taskId, String title, String userName)
 		throws PortalException;

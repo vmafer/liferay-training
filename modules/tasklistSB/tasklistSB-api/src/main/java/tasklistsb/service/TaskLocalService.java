@@ -272,6 +272,19 @@ public interface TaskLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Task> getTasks(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Task> getTasksByGroupId(long groupId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Task> getTasksByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<Task> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Task> getTasksByKeywords(
+		long groupId, String keywords, int start, int end,
+		OrderByComparator<Task> orderByComparator);
+
 	/**
 	 * Returns all the tasks matching the UUID and company.
 	 *
@@ -304,6 +317,9 @@ public interface TaskLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTasksCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getTasksCountByKeywords(long groupId, String keywords);
 
 	public Task updateTask(long taskId, String title, String userName)
 		throws PortalException;
