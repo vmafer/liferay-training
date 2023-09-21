@@ -335,6 +335,33 @@ public class TaskLocalServiceWrapper
 		return _taskLocalService.getTasks(start, end);
 	}
 
+	@Override
+	public java.util.List<tasklistsb.model.Task> getTasksByGroupId(
+		long groupId, int start, int end) {
+
+		return _taskLocalService.getTasksByGroupId(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<tasklistsb.model.Task> getTasksByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<tasklistsb.model.Task>
+			orderByComparator) {
+
+		return _taskLocalService.getTasksByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<tasklistsb.model.Task> getTasksByKeywords(
+		long groupId, String keywords, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<tasklistsb.model.Task>
+			orderByComparator) {
+
+		return _taskLocalService.getTasksByKeywords(
+			groupId, keywords, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns all the tasks matching the UUID and company.
 	 *
@@ -377,6 +404,11 @@ public class TaskLocalServiceWrapper
 	@Override
 	public int getTasksCount() {
 		return _taskLocalService.getTasksCount();
+	}
+
+	@Override
+	public long getTasksCountByKeywords(long groupId, String keywords) {
+		return _taskLocalService.getTasksCountByKeywords(groupId, keywords);
 	}
 
 	@Override

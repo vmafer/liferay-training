@@ -67,6 +67,21 @@ public class TaskServiceWrapper
 	}
 
 	@Override
+	public java.util.List<tasklistsb.model.Task> getTasksByKeywords(
+		long groupId, String keywords, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<tasklistsb.model.Task>
+			orderByComparator) {
+
+		return _taskService.getTasksByKeywords(
+			groupId, keywords, start, end, orderByComparator);
+	}
+
+	@Override
+	public long getTasksCountByKeywords(long groupId, String keywords) {
+		return _taskService.getTasksCountByKeywords(groupId, keywords);
+	}
+
+	@Override
 	public tasklistsb.model.Task updateTask(
 			long taskId, String title, String userName)
 		throws com.liferay.portal.kernel.exception.PortalException {

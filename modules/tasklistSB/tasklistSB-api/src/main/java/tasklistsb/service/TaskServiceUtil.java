@@ -6,6 +6,7 @@
 package tasklistsb.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 
@@ -58,6 +59,18 @@ public class TaskServiceUtil {
 
 	public static List<Task> getTaskByGroupId(long groupId) {
 		return getService().getTaskByGroupId(groupId);
+	}
+
+	public static List<Task> getTasksByKeywords(
+		long groupId, String keywords, int start, int end,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getService().getTasksByKeywords(
+			groupId, keywords, start, end, orderByComparator);
+	}
+
+	public static long getTasksCountByKeywords(long groupId, String keywords) {
+		return getService().getTasksCountByKeywords(groupId, keywords);
 	}
 
 	public static Task updateTask(long taskId, String title, String userName)

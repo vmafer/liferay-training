@@ -301,6 +301,28 @@ public class TaskLocalServiceUtil {
 		return getService().getTasks(start, end);
 	}
 
+	public static List<Task> getTasksByGroupId(
+		long groupId, int start, int end) {
+
+		return getService().getTasksByGroupId(groupId, start, end);
+	}
+
+	public static List<Task> getTasksByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getService().getTasksByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	public static List<Task> getTasksByKeywords(
+		long groupId, String keywords, int start, int end,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getService().getTasksByKeywords(
+			groupId, keywords, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns all the tasks matching the UUID and company.
 	 *
@@ -339,6 +361,10 @@ public class TaskLocalServiceUtil {
 	 */
 	public static int getTasksCount() {
 		return getService().getTasksCount();
+	}
+
+	public static long getTasksCountByKeywords(long groupId, String keywords) {
+		return getService().getTasksCountByKeywords(groupId, keywords);
 	}
 
 	public static Task updateTask(long taskId, String title, String userName)
